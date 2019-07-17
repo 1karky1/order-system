@@ -1,19 +1,10 @@
 import React from "react";
 import moment from "moment";
 
-export const defaultExternalEvents = [{
-    title: 'event1',
-    id   : 'event1'
-}, {
-    title: 'event2',
-    id   : 'event2'
-}];
-
 const slot1 = {
     name: 'Slot 1',
     calendarRef: React.createRef(),
-    calendarConfig: {
-    },
+    calendarConfig: {},
     events: [{
         id: 'a',
         title: 'my event a',
@@ -28,8 +19,7 @@ const slot1 = {
 const slot2 = {
     name: 'Slot 2',
     calendarRef: React.createRef(),
-    calendarConfig: {
-    },
+    calendarConfig: {},
     events: [{
         id: 'c',
         title: 'my event c',

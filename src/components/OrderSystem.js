@@ -1,7 +1,7 @@
 import React from 'react';
 import EventCreateUpdate from './EventCreateUpdate';
 import Slots from './Slots';
-import {defaultExternalEvents, defaultSlots} from './constants';
+import {defaultSlots} from './constants';
 
 class OrderSystem extends React.Component {
 
@@ -10,7 +10,6 @@ class OrderSystem extends React.Component {
         this.state = {
             selectedEvent: null,
             eventDropped: false,
-            externalEvents: defaultExternalEvents,
             slots: defaultSlots
         };
     };
@@ -41,15 +40,15 @@ class OrderSystem extends React.Component {
     render() {
         return (
             <div className='flexbox-styles'>
-              <div className='order-system'>
-                  <EventCreateUpdate events={this.state.externalEvents}
-                                     eventDropped={this.state.eventDropped}
-                                     onEventFormCleared={this.onEventFormCleared}
-                                     selectedEvent={this.state.selectedEvent}/>
-                  <Slots slots={this.state.slots}
-                         onEventDropped={this.onEventDropped}
-                         selectEvent={this.selectEvent}/>
-              </div>
+                <div className='order-system'>
+                    <EventCreateUpdate
+                        eventDropped={this.state.eventDropped}
+                        onEventFormCleared={this.onEventFormCleared}
+                        selectedEvent={this.state.selectedEvent}/>
+                    <Slots slots={this.state.slots}
+                           onEventDropped={this.onEventDropped}
+                           selectEvent={this.selectEvent}/>
+                </div>
             </div>
         );
     }
