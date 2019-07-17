@@ -1,19 +1,17 @@
 import React from 'react';
 import Slot from './Slot';
 
-class Slots extends React.Component {
-    render() {
-        return (
-            <div className='slots'>
-                {this.props.slots.map((slot, index) => (
-                    <Slot key={index}
-                          slot={slot}
-                          selectEvent={this.props.selectEvent}
-                          onEventDropped={this.props.onEventDropped}/>
-                ))}
-            </div>
-        );
-    }
-}
+const Slots = ({slots = [], selectEvent, onEventDropped}) => {
+    return (
+        <div className='slots'>
+            {slots.map((slot, index) => (
+                <Slot key={index}
+                      slot={slot}
+                      selectEvent={selectEvent}
+                      onEventDropped={onEventDropped}/>
+            ))}
+        </div>
+    )
+};
 
 export default Slots;

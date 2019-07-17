@@ -8,31 +8,26 @@ import { defaultChangeableCalendarConfig, defaultFixedCalendarConfig } from "./c
 
 
 
-// Inputs: { calendarRef, events, calendarConfig, onExternalEventDropped}
+// Inputs: { calendarRef, events, calendarConfig, onEventDropped, onEventClick }
 //    calendarRef: API to work with calendar
 //    events: link to json endpoint, array or function
 //    calendarConfig: calendar config override options
-//    onExternalEventDropped: remove external event
-class Calendar extends React.Component {
-
-    getCalendarOptions = () => {
-        const otherConf = {
-            ref: this.props.calendarRef,
-            plugins: [timeGridPlugin, interactionPlugin, bootstrapPlugin],
-            eventClick: this.props.onEventClick,
-            eventRender: this.eventRender,
-            eventReceive: this.props.onEventDropped,
-            events: this.props.events,
-        };
-        return { ...defaultChangeableCalendarConfig, ...this.props.calendarConfig, ...otherConf,
-                 ...defaultFixedCalendarConfig };
+//    onEventDropped: remove external event
+//    onEventClick: event click
+const Calendar = ({calendarRef, events, calendarConfig, onEventClick, onEventDropped}) => {
+    const otherConf = {
+        ref: calendarRef,
+        plugins: [timeGridPlugin, interactionPlugin, bootstrapPlugin],
+        eventClick: onEventClick,
+        eventReceive: onEventDropped,
+        events: events,
     };
+    const finalCalendarConfig = { ...defaultChangeableCalendarConfig, ...calendarConfig,
+        ...otherConf,...defaultFixedCalendarConfig };
 
-    render() {
-        return (
-            <FullCalendar {...this.getCalendarOptions()}/>
-        );
-    }
-}
+    return (
+        <FullCalendar {...finalCalendarConfig}/>
+    );
+};
 
 export default Calendar;
