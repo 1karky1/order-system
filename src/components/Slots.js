@@ -9,7 +9,7 @@ class Slots extends React.Component {
                     <Slot key={index}
                           slot={slot}
                           selectEvent={this.props.selectEvent}
-                          removeExternalEvent={this.props.removeExternalEvent}/>
+                          onEventDropped={this.props.onEventDropped}/>
                 ))}
             </div>
         );

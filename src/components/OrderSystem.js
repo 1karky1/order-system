@@ -1,5 +1,5 @@
 import React from 'react';
-import ExternalEvents from './ExternalEvents';
+import EventCreateUpdate from './EventCreateUpdate';
 import Slots from './Slots';
 import {defaultExternalEvents, defaultSlots} from './constants';
 
@@ -9,13 +9,18 @@ class OrderSystem extends React.Component {
         super(props);
         this.state = {
             selectedEvent: null,
+            eventDropped: false,
             externalEvents: defaultExternalEvents,
             slots: defaultSlots
         };
-    }
+    };
 
-    removeExternalEvent = (info) => {
-        this.setState({externalEvents: this.state.externalEvents.filter(event => event.id !== info.event.id)});
+    onEventDropped = (info) => {
+        this.setState({eventDropped: true});
+    };
+
+    onEventFormCleared = () => {
+        this.setState({eventDropped: false});
     };
 
     selectEvent = (info) => {
@@ -37,10 +42,12 @@ class OrderSystem extends React.Component {
         return (
             <div className='flexbox-styles'>
               <div className='order-system'>
-                  <ExternalEvents events={this.state.externalEvents}
-                                  selectedEvent={this.state.selectedEvent}/>
+                  <EventCreateUpdate events={this.state.externalEvents}
+                                     eventDropped={this.state.eventDropped}
+                                     onEventFormCleared={this.onEventFormCleared}
+                                     selectedEvent={this.state.selectedEvent}/>
                   <Slots slots={this.state.slots}
-                         removeExternalEvent={this.removeExternalEvent}
+                         onEventDropped={this.onEventDropped}
                          selectEvent={this.selectEvent}/>
               </div>
             </div>

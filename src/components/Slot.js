@@ -7,7 +7,7 @@ class Slot extends React.Component {
         return (
             <div className='slot'>
                 <Calendar calendarRef={calendarRef} events={events} calendarConfig={calendarConfig}
-                          onExternalEventDropped={this.props.removeExternalEvent} onEventClick={this.props.selectEvent}/>
+                          onEventDropped={this.props.onEventDropped} onEventClick={this.props.selectEvent}/>
             </div>
         );
     }

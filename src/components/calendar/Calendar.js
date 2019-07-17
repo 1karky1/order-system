@@ -21,7 +21,7 @@ class Calendar extends React.Component {
             plugins: [timeGridPlugin, interactionPlugin, bootstrapPlugin],
             eventClick: this.props.onEventClick,
             eventRender: this.eventRender,
-            eventReceive: this.props.onExternalEventDropped,
+            eventReceive: this.props.onEventDropped,
             events: this.props.events,
         };
         return { ...defaultChangeableCalendarConfig, ...this.props.calendarConfig, ...otherConf,
