@@ -1,6 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import Calendars from './calendars/Calendars';
+import {resetEventView} from '../actions/eventView'
+
 
 class CalendarsViewContainer extends React.Component {
 
@@ -34,17 +36,17 @@ class CalendarsViewContainer extends React.Component {
 
     render() {
         return (
-            <Calendars slots={this.props.calendars} onEventClick={this.onEventClick}/>
+            <Calendars slots={this.props.calendars} onEventClick={this.onEventClick}
+                       onEventDropped={this.props.resetEventView}/>
         )
     }
-
 }
 
 const mapStateToProps = (state) => {
     return {calendars: state.calendarsView.calendars}
 };
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {resetEventView};
 
 export default connect(
     mapStateToProps,

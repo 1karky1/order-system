@@ -1,5 +1,6 @@
 import React from 'react';
 import {Draggable} from "@fullcalendar/interaction";
+import './eventbox.scss';
 
 // Inputs: { formIsValid, fields, }
 //    formIsValid(optional | default: false): determine if event form is valid
