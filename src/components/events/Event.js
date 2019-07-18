@@ -38,7 +38,6 @@ class Event extends React.Component {
 
     constructor(props) {
         super(props);
-        console.log("constructor");
         this.state = {...this.getInitStateFromFields()};
     };
 

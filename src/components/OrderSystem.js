@@ -1,7 +1,6 @@
 import React from 'react';
 import EventCreateUpdate from './EventCreateUpdate';
-import Slots from './Slots';
-import {defaultSlots} from './constants';
+import CalendarsViewContainer from './CalendarsViewContainer';
 
 class OrderSystem extends React.Component {
 
@@ -10,31 +9,11 @@ class OrderSystem extends React.Component {
         this.state = {
             selectedEvent: null,
             eventDropped: false,
-            slots: defaultSlots
         };
-    };
-
-    onEventDropped = (info) => {
-        this.setState({eventDropped: true});
     };
 
     onEventFormCleared = () => {
         this.setState({eventDropped: false});
-    };
-
-    selectEvent = (info) => {
-        this.state.slots.forEach(slot => {
-            const calendar = slot.calendarRef.current.getApi();
-            calendar.getEvents().forEach(event => {
-                if (event.id === info.event.id && event.classNames.length === 0) {
-                    event.setProp('classNames', 'selected-event');
-                    this.setState({selectedEvent: info.event});
-                } else {
-                    event.setProp('classNames', null);
-                    this.setState({selectedEvent: null});
-                }
-            });
-        });
     };
 
     render() {
@@ -45,9 +24,7 @@ class OrderSystem extends React.Component {
                         eventDropped={this.state.eventDropped}
                         onEventFormCleared={this.onEventFormCleared}
                         selectedEvent={this.state.selectedEvent}/>
-                    <Slots slots={this.state.slots}
-                           onEventDropped={this.onEventDropped}
-                           selectEvent={this.selectEvent}/>
+                    <CalendarsViewContainer />
                 </div>
             </div>
         );

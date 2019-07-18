@@ -1,10 +1,19 @@
 import React from "react";
 import moment from "moment";
 
-const slot1 = {
-    name: 'Slot 1',
+
+/*
+ * action types
+ */
+
+/*
+ * other constants
+ */
+const calendar1 = {
+    name: 'Calendar 1',
     calendarRef: React.createRef(),
-    calendarConfig: {},
+    calendarConfig: {
+    },
     events: [{
         id: 'a',
         title: 'my event a',
@@ -15,11 +24,11 @@ const slot1 = {
         start: `${moment().format('YYYY-MM-DD')}T12:00:00.000Z`,
     }]
 };
-
-const slot2 = {
-    name: 'Slot 2',
+const calendar2 = {
+    name: 'Calendar 2',
     calendarRef: React.createRef(),
-    calendarConfig: {},
+    calendarConfig: {
+    },
     events: [{
         id: 'c',
         title: 'my event c',
@@ -30,6 +39,9 @@ const slot2 = {
         start: `${moment().format('YYYY-MM-DD')}T12:00:00.000Z`,
     }]
 };
+export const defaultCalendars = [calendar1, calendar2];
 
+/*
+ * action creators
+ */
 
-export const defaultSlots = [slot1, slot2];

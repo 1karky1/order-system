@@ -3,7 +3,7 @@ import FullCalendar from '@fullcalendar/react';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from "@fullcalendar/interaction";
 import bootstrapPlugin from "@fullcalendar/bootstrap";
-import './calendar.scss';
+import './fullcalendarwrapper.scss';
 import { defaultChangeableCalendarConfig, defaultFixedCalendarConfig } from "./constants";
 
 
@@ -14,7 +14,7 @@ import { defaultChangeableCalendarConfig, defaultFixedCalendarConfig } from "./c
 //    calendarConfig: calendar config override options
 //    onEventDropped: remove external event
 //    onEventClick: event click
-const Calendar = ({calendarRef, events, calendarConfig, onEventClick, onEventDropped}) => {
+const FullCalendarWrapper = ({calendarRef, events, calendarConfig, onEventClick, onEventDropped}) => {
     const otherConf = {
         ref: calendarRef,
         plugins: [timeGridPlugin, interactionPlugin, bootstrapPlugin],
@@ -30,4 +30,4 @@ const Calendar = ({calendarRef, events, calendarConfig, onEventClick, onEventDro
     );
 };
 
-export default Calendar;
+export default FullCalendarWrapper;
