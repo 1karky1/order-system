@@ -28,6 +28,7 @@ const DURATION_FIELD={
     name: 'eventDuration',
     label: 'Duration',
     type: 'number',
+    step: '30',
     eventDataName: 'duration',
     isValid: (value) => {
         return value && value >= 30 && value <=1440 && value % 30 === 0;

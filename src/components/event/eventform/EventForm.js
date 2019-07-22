@@ -12,7 +12,7 @@ const EventForm = (props) => {
                 {fields.map((field, index) => (
                     <label className="event-label" key={index}>
                         {field.label}
-                        <input className="event-input" type={field.type} name={field.name}
+                        <input className="event-input" type={field.type} name={field.name} step={field.step}
                                value={props[field.name]} onChange={props.inputChange}/>
                     </label>
                 ))}
