@@ -14,12 +14,13 @@ import { defaultChangeableCalendarConfig, defaultFixedCalendarConfig } from "./c
 //    calendarConfig: calendar config override options
 //    onEventDropped: remove external event
 //    onEventClick: event click
-const FullCalendarWrapper = ({calendarRef, events, calendarConfig, onEventClick, onEventDropped}) => {
+const FullCalendarWrapper = ({calendarRef, events, calendarConfig, onEventClick, onEventDropped, onEventResize}) => {
     const otherConf = {
         ref: calendarRef,
         plugins: [timeGridPlugin, interactionPlugin, bootstrapPlugin],
         eventClick: onEventClick,
         eventReceive: onEventDropped,
+        eventResize: onEventResize,
         events: events,
     };
     const finalCalendarConfig = { ...defaultChangeableCalendarConfig, ...calendarConfig,

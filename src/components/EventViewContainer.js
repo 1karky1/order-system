@@ -1,7 +1,9 @@
 import React from 'react';
 import Event from './event/Event'
 import {connect} from "react-redux";
-import {formFieldsConfig, inputChanges} from "../actions/eventView";
+import {formFieldsConfig, inputChanges, resetEventView} from "../actions/eventView";
+import {clearSelectedEvent} from "../actions/calendarsView";
+import {unselectEvent} from "../utils/fullcalendar";
 
 
 class EventViewContainer extends React.Component {
@@ -27,19 +29,34 @@ class EventViewContainer extends React.Component {
         }
     };
 
+    eventExists = () => {
+        return !!this.props.selectedEvent;
+    };
+
+    onEventCanceled = () => {
+        this.props.clearSelectedEvent();
+        this.props.resetEventView();
+        unselectEvent(this.props.calendars);
+    };
+
     render() {
         return (
             <Event formFieldsConfig={this.getFormFields()} formValues={this.props.formValues}
-                   isValid={this.isValid()} eventData={this.getEventData()} inputChanges={this.props.inputChanges}/>
+                   eventExists={this.eventExists()} isValid={this.isValid()} eventData={this.getEventData()}
+                   inputChanges={this.props.inputChanges} onEventCanceled={this.onEventCanceled}/>
         );
     }
 }
 
 const mapStateToProps = (state) => {
-    return {formValues: state.eventView.formValues}
+    return {
+        formValues: state.eventView.formValues,
+        calendars: state.calendarsView.calendars,
+        selectedEvent: state.calendarsView.selectedEvent
+    }
 };
 
-const mapDispatchToProps = {inputChanges};
+const mapDispatchToProps = {inputChanges, clearSelectedEvent, resetEventView};
 
 export default connect(
     mapStateToProps,

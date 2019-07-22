@@ -2,51 +2,43 @@ import React from 'react';
 import {connect} from 'react-redux';
 import Calendars from './calendars/Calendars';
 import {resetEventView} from '../actions/eventView'
+import {selectedEventChanges} from '../actions/calendarsView'
+import {selectUnselectEvent} from '../utils/fullcalendar'
 
 
 class CalendarsViewContainer extends React.Component {
 
-    selectUnselectEvent = (clickedEventId) => {
-        this.forEachEvent( event => {
-            if (event.id === clickedEventId && event.classNames.length === 0) {
-                event.setProp('classNames', 'selected-event');
-            } else {
-                event.setProp('classNames', null);
-            }
-        });
-    };
-
-    forEachEvent = (callback) => {
-        this.forEachCalendar(calendar => {
-            this.getCalendarAPI(calendar).getEvents().forEach(event => callback(event));
-        });
-    };
-
-    forEachCalendar = (callback) => {
-        this.props.calendars.forEach(calendar => callback(calendar));
-    };
-
-    getCalendarAPI = (calendar) => {
-        return calendar.calendarRef.current.getApi();
-    };
-
     onEventClick = (info) => {
-        this.selectUnselectEvent(info.event.id);
+        selectUnselectEvent(this.props.calendars, info.event.id);
+        this.props.selectedEventChanges(this.props.selectedEvent, info.event);
+        this.props.resetEventView();
+    };
+
+    onEventDrop = () => {
+        this.props.resetEventView();
+    };
+
+    onEventResize = (info) => {
+        this.props.selectedEventChanges(null, info.event);
+        this.props.resetEventView();
     };
 
     render() {
         return (
-            <Calendars slots={this.props.calendars} onEventClick={this.onEventClick}
-                       onEventDropped={this.props.resetEventView}/>
+            <Calendars slots={this.props.calendars} onEventClick={this.onEventClick} onEventResize={this.onEventResize}
+                       onEventDropped={this.onEventDrop}/>
         )
     }
 }
 
 const mapStateToProps = (state) => {
-    return {calendars: state.calendarsView.calendars}
+    return {
+        calendars: state.calendarsView.calendars,
+        selectedEvent: state.calendarsView.selectedEvent
+    }
 };
 
-const mapDispatchToProps = {resetEventView};
+const mapDispatchToProps = {resetEventView, selectedEventChanges};
 
 export default connect(
     mapStateToProps,

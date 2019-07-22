@@ -1,4 +1,4 @@
-import {minutesToHourMinutes} from "../utils/time";
+import {minutesToHourMinutes, datesToDuration} from "../utils/time";
 
 
 /*
@@ -22,6 +22,9 @@ const TITLE_FIELD={
     },
     eventDataValue: (value) => {
         return value;
+    },
+    eventFormValue: (event) => {
+        return event ? event.title : '';
     }
 };
 const DURATION_FIELD={
@@ -35,6 +38,10 @@ const DURATION_FIELD={
     },
     eventDataValue: (value) => {
         return minutesToHourMinutes(value);
+    },
+    eventFormValue: (event) => {
+        // return 30;
+        return event ? datesToDuration(event.start, event.end) : '';
     }
 };
 export const formFieldsConfig = [TITLE_FIELD, DURATION_FIELD];
