@@ -39,11 +39,19 @@ class EventViewContainer extends React.Component {
         unselectEvent(this.props.calendars);
     };
 
+    onEventSaved = () => {
+        this.getFormFields().forEach(field => {
+            field.updateFullCalendarEvent(this.props.selectedEvent, this.props.formValues[field.name]);
+        });
+        this.onEventCanceled();
+    };
+
     render() {
         return (
             <Event formFieldsConfig={this.getFormFields()} formValues={this.props.formValues}
                    eventExists={this.eventExists()} isValid={this.isValid()} eventData={this.getEventData()}
-                   inputChanges={this.props.inputChanges} onEventCanceled={this.onEventCanceled}/>
+                   inputChanges={this.props.inputChanges} onEventCanceled={this.onEventCanceled}
+                   onEventSaved={this.onEventSaved}/>
         );
     }
 }

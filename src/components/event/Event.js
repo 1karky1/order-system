@@ -5,16 +5,14 @@ import EventHeader from './eventheader/EventHeader';
 import EventButtons from './eventbuttons/EventButtons';
 
 
-// Inputs: { formFieldsConfig, formValues, eventData, isValid, inputChanges }
-//    event(optional): if exist contains event object
-const Event = ({formFieldsConfig, formValues, eventData, isValid, inputChanges, eventExists, onEventCanceled}) => {
+const Event = ({formFieldsConfig, formValues, eventData, isValid, inputChanges, eventExists, onEventCanceled, onEventSaved}) => {
     return (
         <div className='event-view'>
             <EventHeader/>
             <div className="event">
                 <EventForm fields={formFieldsConfig} {...formValues} inputChange={inputChanges}/>
                 {eventExists
-                    ? <EventButtons onEventCanceled={onEventCanceled}/>
+                    ? <EventButtons onEventCanceled={onEventCanceled} onEventSaved={onEventSaved} formIsValid={isValid}/>
                     : <EventBox eventData={eventData} formIsValid={isValid}/>
                 }
             </div>

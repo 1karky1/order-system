@@ -4,11 +4,15 @@ import './eventbuttons.scss';
 // Inputs: { formIsValid, fields, }
 //    formIsValid(optional | default: false): determine if event form is valid
 //    fields(optional | default: []): list of Event form fields
-const EventButtons = ({onEventCanceled}) => {
+const EventButtons = ({onEventCanceled, onEventSaved, formIsValid}) => {
     return (
-        <div id="event-buttons">
-            <button type="button"> Save </button>
-            <button type="button" onClick={onEventCanceled}> Cancel </button>
+        <div className="event-buttons">
+            {formIsValid &&
+            <div className="">
+                <button type="button" onClick={onEventSaved}> Save </button>
+                <button type="button" onClick={onEventCanceled}> Cancel </button>
+            </div>
+            }
         </div>
     )
 };

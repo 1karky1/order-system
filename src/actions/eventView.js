@@ -1,4 +1,5 @@
 import {minutesToHourMinutes, datesToDuration} from "../utils/time";
+import moment from 'moment';
 
 
 /*
@@ -17,14 +18,17 @@ const TITLE_FIELD={
     label: 'Title',
     type: 'text',
     eventDataName: 'title',
-    isValid: (value) => {
+    isValid(value) {
         return value;
     },
-    eventDataValue: (value) => {
+    eventDataValue(value) {
         return value;
     },
-    eventFormValue: (event) => {
+    eventFormValue(event) {
         return event ? event.title : '';
+    },
+    updateFullCalendarEvent(event, newTitle) {
+        event.setProp(this.eventDataName, newTitle);
     }
 };
 const DURATION_FIELD={
@@ -33,15 +37,19 @@ const DURATION_FIELD={
     type: 'number',
     step: '30',
     eventDataName: 'duration',
-    isValid: (value) => {
+    isValid(value) {
         return value && value >= 30 && value <=1440 && value % 30 === 0;
     },
-    eventDataValue: (value) => {
+    eventDataValue(value) {
         return minutesToHourMinutes(value);
     },
-    eventFormValue: (event) => {
+    eventFormValue(event) {
         // return 30;
         return event ? datesToDuration(event.start, event.end) : '';
+    },
+    updateFullCalendarEvent(event, newDuration) {
+        const eventEnd = moment(event.start).add(parseInt(newDuration), "minutes").format();
+        event.setEnd(eventEnd);
     }
 };
 export const formFieldsConfig = [TITLE_FIELD, DURATION_FIELD];
